@@ -41,4 +41,14 @@ public class UserServiceImpl implements UserService {
         page.setItems(items);
         return page;
     }
+
+    @Override
+    public int delete(Long userId) {
+        return userDao.delete(userId);
+    }
+
+    @Override
+    public User login(User user) {
+        return userDao.queryUserNameAndPassword(user);
+    }
 }

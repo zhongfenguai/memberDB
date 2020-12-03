@@ -14,33 +14,44 @@ import java.util.List;
 public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int insert(User user) {
-        return 0;
+        String sql="INSERT INTO user (username,password,image,type,status)values(?,?,?,?,?)";
+        return update(sql,user.getUsername(),user.getPassword(),user.getImage(),user.getType(),user.getStatus());
     }
 
     @Override
     public int delete(Long userId) {
-        return 0;
+        String sql = "delete from user where id=?";
+        return update(sql, userId);
     }
 
     @Override
     public int update(User user) {
-        return 0;
+        String sql="update user set username=?,password=?,image=?,type=?,status=? where id=?";
+        return update(sql,user.getUsername(),user.getPassword(),user.getImage(),user.getType(),user.getStatus(),user.getId());
     }
 
     @Override
     public List<User> queryAll() {
-        return null;
+        String sql = "select *from user";
+        return queryForList(User.class,sql);
     }
 
     @Override
     public User queryUserById(Long id) {
-        return null;
+        String sql = "select *from user where id=?";
+        return queryForOne(User.class,sql,id);
     }
 
     @Override
     public Integer queryPageTotalCount() {
         String sql="select count(1) from user";
         return Math.toIntExact((Long)queryForSingleValue(sql));
+    }
+
+    @Override
+    public User queryUserNameAndPassword(User user) {
+        String sql="select *from user where username=? and password =?";
+        return queryForOne(User.class,sql,user.getUsername(),user.getPassword());
     }
 
     @Override

@@ -10,5 +10,8 @@ import com.member.utils.Page;
  */
 public interface UserService {
     Page<User> queryByPage(int page,int pageSize);
+    int delete(Long userId);
+    User login(User user);
+
 
 }

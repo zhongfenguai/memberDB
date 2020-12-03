@@ -23,6 +23,9 @@ public interface UserDao {
     //查询当前表的总记录条数
     Integer queryPageTotalCount();
 
+    User queryUserNameAndPassword(User user);
+
+
     //分页查询
     List<User> queryUserByPage(int begin, int pageSize);
 }
